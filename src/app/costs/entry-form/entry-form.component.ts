@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { CategoryManagerComponent } from '../category-manager/category-manager.component';
+import { CostsStorageService } from '../costs-storage.service';
+import { LocalStorage } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-entry-form',
@@ -10,7 +12,8 @@ import { CategoryManagerComponent } from '../category-manager/category-manager.c
 })
 export class EntryFormComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  @LocalStorage() public categories;
+  constructor(public dialog: MatDialog, private storage: CostsStorageService) { }
   entryForm = new FormGroup({
     category: new FormControl('', Validators.required),
     date: new FormControl('', Validators.required),
@@ -29,19 +32,21 @@ export class EntryFormComponent implements OnInit {
   get value() {
     return this.entryForm.get('value').value;
   }
-  categories = [{ value: 'dsa1' }, { value: 'dsa2' }, { value: 'dsa3' }]
+  /* categories = [{ value: 'dsa1' }, { value: 'dsa2' }, { value: 'dsa3' }] */
+
   ngOnInit(): void {
+
   }
   addEntry() {
-    console.log(this.value)
+    this.storage.add({id: this.storage.getUniqueEntryId(), category: 'food', date: new Date(), description: 'dsa', value: 22 });
   }
   openCategoryManager() {
-    const dialogRef = this.dialog.open(CategoryManagerComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-
-    });
+    this.dialog.open(CategoryManagerComponent);
   }
+
+  clear(){
+    this.storage.clear();
+  }
+
 }
 

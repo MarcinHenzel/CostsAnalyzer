@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-category-manager',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryManagerComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<CategoryManagerComponent>) { }
 
   ngOnInit(): void {
   }
-
+  close(): void {
+    this.dialogRef.close();
+  }
 }
