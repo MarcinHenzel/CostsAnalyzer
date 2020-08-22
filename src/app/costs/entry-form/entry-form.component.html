@@ -1,0 +1,32 @@
+<form class="entry-form" [formGroup]="entryForm" (ngSubmit)="addEntry()">
+  <!--   <mat-form-field class="">
+    <mat-label>Category</mat-label>
+    <textarea matInput ></textarea>
+  </mat-form-field> -->
+  <h4>Basic mat-select</h4>
+  <mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+    <mat-select matInput formControlName="category">
+      <mat-option *ngFor="let category of categories" [value]="category.value">
+        {{category.value}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="">
+    <mat-label>Data</mat-label>
+    <input type="date" matInput formControlName="date">
+  </mat-form-field>
+
+  <mat-form-field class="">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field class="">
+    <mat-label>Value</mat-label>
+    <input type="text" matInput formControlName="value">
+  </mat-form-field>
+</form>
+<button (click)='openCategoryManager()'>Manage categories</button>
+<button (click)='addEntry()' type='submit'>add</button>

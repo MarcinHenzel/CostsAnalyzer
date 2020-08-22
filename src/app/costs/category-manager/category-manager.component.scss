@@ -1,0 +1,9 @@
+@import 'src/styles.scss';
+:host {
+  display: flex;
+  width: 40vw;
+  height: 40vh;
+  background-color: white;
+  border-radius: 10px;
+  @include shadow-right-bot;
+}
