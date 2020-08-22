@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+@mixin shadow-right-bot {
+  box-shadow: -2px -2px 3px rgba(0,0,0,.20);
+}
+@mixin center-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  background: grey;
+  margin: 0;
+  padding: 0;
+}
