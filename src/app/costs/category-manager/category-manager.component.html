@@ -1,11 +1,26 @@
-<!-- <ol>
-  <li>
+<h1 mat-dialog-title>Manage Your categories</h1>
+<mat-dialog-content>
+  <h2>Add category</h2>
+  <form #addForm="ngForm" (ngSubmit)="addCategory()">
     <mat-form-field>
-      <mat-label>What's your name?</mat-label>
-
+      <mat-label>Add</mat-label>
+      <input type="text" matInput [(ngModel)]="newCat" name="newCat" required>
     </mat-form-field>
-  </li>
-
-</ol>
- -->
-<button (click)="close()">close</button>
+    <button mat-raised-button color="accent" type="submit" [disabled]="!addForm.valid">Add </button>
+  </form>
+  <h2>Delete category</h2>
+  <form #deleteForm="ngForm" (ngSubmit)="deleteCategory()">
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <mat-select [(ngModel)]="CatToDel" name="categories" matInput required>
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{category}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="accent" type="submit" [disabled]="!deleteForm.valid">Delete</button>
+  </form>
+</mat-dialog-content>
+<div class="cont-of-absolute">
+  <button class="btn-close" mat-raised-button (click)="close()">close</button>
+</div>

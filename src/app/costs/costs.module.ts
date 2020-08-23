@@ -9,6 +9,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CategoryManagerComponent } from './category-manager/category-manager.component';
 import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
+import {TextFieldModule} from '@angular/cdk/text-field';
+
 @NgModule({
   declarations: [EntryFormComponent, EntryListComponent, EntryElComponent, CategoryManagerComponent],
   imports: [
@@ -18,7 +21,9 @@ import {MatSelectModule} from '@angular/material/select';
     BrowserAnimationsModule,
     MatInputModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatButtonModule,
+    TextFieldModule
   ],
   exports: [
     [EntryFormComponent, EntryListComponent],

@@ -38,13 +38,19 @@ export class EntryFormComponent implements OnInit {
 
   }
   addEntry() {
-    this.storage.add({id: this.storage.getUniqueEntryId(), category: 'food', date: new Date(), description: 'dsa', value: 22 });
+    this.storage.add({
+      id: this.storage.getUniqueEntryId(),
+      category: this.category,
+      date: this.date,
+      description: this.description,
+      value: this.value
+    });
   }
   openCategoryManager() {
     this.dialog.open(CategoryManagerComponent);
   }
 
-  clear(){
+  clear() {
     this.storage.clear();
   }
 

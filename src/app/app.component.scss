@@ -5,7 +5,13 @@
 }
 .narrow-cont {
   width: 1440px;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  padding-top: 10px;
+  row-gap: 5px;
 }
+
 @media (max-width: 1439px) {
   .narrow-cont {
     width: 96vw;

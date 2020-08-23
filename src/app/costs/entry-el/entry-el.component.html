@@ -1,6 +1,16 @@
-Value: {{entry.value}}
-Category: {{entry.category}}
-Description: {{entry.date}}
-Date:{{entry.date | date}}
-<button (click)="edit()">Edit</button>
-<button (click)="delete()">Delete</button>
+<p class="date-cont">{{entry.date | date}}</p>
+<div class="main-cont">
+  <div class="narrow">
+    <span class="value" >{{entry.value}}</span>
+    <span class="value"> {{entry.category}}</span></div>
+    <div class="verti-spacer"></div>
+  <div class="wide">
+    <div class="desc-cont">
+      {{entry.description}}
+    </div>
+    <div class="btn-cont">
+      <button class="btn" (click)="edit()">Edit</button>
+      <button class="btn" (click)="delete()">Delete</button>
+    </div>
+  </div>
+</div>

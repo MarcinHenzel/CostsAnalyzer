@@ -28,6 +28,9 @@ export class CostsStorageService {
     this.categories.splice(index, 1);
     this.webStorage.store('categories', this.categories);
   }
+  addCategory(category) {
+    this.webStorage.store('categories', [...this.categories, category]);
+  }
   deleteEntry(id: number): void {
     const filteredEntries = this.entries.filter(entry => {
       if (id !== entry.id) return entry;

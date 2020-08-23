@@ -1,9 +1,13 @@
-@import 'src/styles.scss';
-:host {
-  display: flex;
-  width: 40vw;
-  height: 40vh;
-  background-color: white;
-  border-radius: 10px;
-  @include shadow-right-bot;
+
+button {
+  margin: 5px;
+}
+.cont-of-absolute {
+  position:relative;
+  height: 30px;
+}
+.btn-close {
+  position: absolute;
+  left:50%;
+  transform: translate(-50%);
 }
