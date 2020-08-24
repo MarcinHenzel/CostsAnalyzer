@@ -6,62 +6,51 @@ import { Entry } from '../models/Entry';
   providedIn: 'root'
 })
 export class CostsStorageService {
+  get entries(): Entry[] { return this.webStorage.retrieve('entries'); }
+  get categories(): string[] { return this.webStorage.retrieve('categories'); }
 
-  /*   entries: Entry[];
-    categories: string[]; */
-  get entries(): Entry[] {
-    return this.webStorage.retrieve('entries');
-  }
-  get categories() {
-    return this.webStorage.retrieve('categories');
-  }
   constructor(private webStorage: LocalStorageService) {
-
-
-    this.initLocalStorage()
+    this.initLocalStorage();
   }
-  clear() {
-    this.webStorage.clear();
+  addCategory(category: string): void {
+    this.webStorage.store('categories', [...this.categories, category]);
   }
-  deleteCategory(toDelete) {
+  deleteCategory(toDelete: string): void {
     const index = this.categories.indexOf(toDelete);
     this.categories.splice(index, 1);
     this.webStorage.store('categories', this.categories);
   }
-  addCategory(category) {
-    this.webStorage.store('categories', [...this.categories, category]);
+  addEntry(entry: Entry): void {
+    this.webStorage.store('entries', [...this.entries, entry]);
   }
   deleteEntry(id: number): void {
     const filteredEntries = this.entries.filter(entry => {
       if (id !== entry.id) return entry;
-    })
+    });
     this.webStorage.store('entries', filteredEntries);
   }
-  add(entry: Entry) {
-    this.webStorage.store('entries', [...this.entries, entry]);
+  editEntry(entryToEdit: Entry): void {
+    const editedEntries = this.entries.map((entry) => {
+      if (entry.id !== entryToEdit.id) return entry;
+      const { category, date, description, value } = entryToEdit;
+      return { id: entry.id, category, date, description, value };
+    });
+    this.webStorage.store('entries', editedEntries);
   }
-  getUniqueEntryId() {
+  getUniqueEntryId(): number {
     let biggestId = this.entries.reduce((acc, entry) => {
       return (entry.id >= acc) ? entry.id : acc;
     }, 0);
     return ++biggestId;
   }
-  initLocalStorage() {
+  initLocalStorage(): void {
     const initialEntries = [];
     const initialCategories = ['bills', 'transport', 'food'];
     if (!this.webStorage.retrieve('categories')) {
-      console.log('initCategories');
       this.webStorage.store('categories', initialCategories);
     }
     if (!this.webStorage.retrieve('entries')) {
-      console.log('initEntries');
       this.webStorage.store('entries', initialEntries);
     }
-    this.webStorage.observe('entries').subscribe((entry) => {
-      console.log(entry)
-    });
-    this.webStorage.observe('categories').subscribe((category) => {
-      console.log(category)
-    })
   }
 }

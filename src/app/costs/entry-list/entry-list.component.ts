@@ -11,15 +11,8 @@ import { CostsStorageService } from '../costs-storage.service';
 export class EntryListComponent implements OnInit {
 
   @LocalStorage() public entries: Entry[];
-  constructor(private storage:  CostsStorageService) { }
-/*   entries: Entry[] = [{ category: 'food', date: new Date(), description: 'dsa', value: 22 },
-   { category: 'food2', date: new Date(), description: 'dsa2', value: 22 }] */
+  constructor(private storage: CostsStorageService) { }
   ngOnInit(): void {
-  }
-
-  editEntry(symbol){
-    console.log(symbol)
-    console.log(symbol)
   }
   deleteEntry(id: number) {
     this.storage.deleteEntry(id);

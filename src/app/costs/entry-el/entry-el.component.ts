@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Entry } from 'src/app/models/Entry';
+import { MatDialog } from '@angular/material/dialog';
+import { EntryFormComponent } from '../entry-form/entry-form.component';
 
 
 @Component({
@@ -10,16 +12,12 @@ import { Entry } from 'src/app/models/Entry';
 export class EntryElComponent implements OnInit {
   @Input() public entry: Entry;
   @Output() public deleteEl = new EventEmitter();
-  @Output() public editEl = new EventEmitter();
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
   edit(){
-/*     console.log(this.entry.id)
-    console.log(this.entry.id === JSON.parse(this.entry.id.toString())); */
-
-    this.editEl.emit(this.entry.id);
+    this.dialog.open(EntryFormComponent, {data: this.entry,  width: '80vw'});
   }
   delete(){
     this.deleteEl.emit(this.entry.id);

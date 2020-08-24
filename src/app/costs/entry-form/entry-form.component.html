@@ -1,33 +1,36 @@
-<form class="entry-form" [formGroup]="entryForm" (ngSubmit)="addEntry()">
-<div class="col-container">
-  <mat-form-field  >
-    <mat-label>Data</mat-label>
-    <input type="date" matInput formControlName="date">
-  </mat-form-field>
+<form class="entry-form" [formGroup]="entryForm" (ngSubmit)="submitEntry()">
+  <div class="col-container">
+    <mat-form-field>
+      <mat-label>Data</mat-label>
+      <input type="date" matInput formControlName="date">
+    </mat-form-field>
 
-  <mat-form-field >
-    <mat-label>Value</mat-label>
-    <input type="text" matInput formControlName="value">
-  </mat-form-field>
-</div>
-
-<div class="col-container">
-  <mat-form-field >
-    <mat-label>Category</mat-label>
-    <mat-select matInput formControlName="category">
-      <mat-option *ngFor="let category of categories" [value]="category">
-        {{category}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <button mat-raised-button  color="accent" (click)='openCategoryManager()'>Manage categories</button>
-</div>
-  <mat-form-field >
+    <mat-form-field>
+      <mat-label>Value</mat-label>
+      <input type="text" matInput formControlName="value">
+    </mat-form-field>
+  </div>
+  <div class="col-container">
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <mat-select matInput formControlName="category">
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{category}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button class="btn" mat-raised-button color="accent" type="button" (click)='openCategoryManager()'>Manage categories
+    </button>
+  </div>
+  <mat-form-field>
     <mat-label>Description</mat-label>
     <textarea rows="5" class="desc-text" matInput formControlName="description"></textarea>
   </mat-form-field>
-  <button class="sub-btn" mat-raised-button  color="accent"  type='submit'>Add</button>
+  <div class="submit-cont">
+    <button *ngIf="!isEditMode; else editBtn" class="btn" mat-raised-button color="accent" type='submit'>Add</button>
+    <ng-template #editBtn>
+      <button class="btn" mat-raised-button color="accent" type='submit' matDialogClose>Edit</button>
+      <button class="btn" mat-raised-button type='button' matDialogClose>Close</button>
+    </ng-template>
+  </div>
 </form>
-
-
-
