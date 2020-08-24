@@ -25,13 +25,17 @@ export class CostsStorageService {
   }
   deleteEntry(id: number): void {
     const filteredEntries = this.entries.filter(entry => {
-      if (id !== entry.id) return entry;
+      if (id !== entry.id) {
+        return entry;
+      }
     });
     this.webStorage.store('entries', filteredEntries);
   }
   editEntry(entryToEdit: Entry): void {
     const editedEntries = this.entries.map((entry) => {
-      if (entry.id !== entryToEdit.id) return entry;
+      if (entry.id !== entryToEdit.id) {
+        return entry;
+      }
       const { category, date, description, value } = entryToEdit;
       return { id: entry.id, category, date, description, value };
     });

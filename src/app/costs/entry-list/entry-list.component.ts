@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Entry } from 'src/app/models/Entry';
-import { LocalStorage, LocalStorageService } from 'ngx-webstorage';
-import { CostsStorageService } from '../costs-storage.service';
+import { LocalStorage} from 'ngx-webstorage';
+import { Entry } from 'src/app/shared/models/Entry';
+import { CostsStorageService } from 'src/app/shared/services/costs-storage.service';
 
 @Component({
   selector: 'app-entry-list',
   templateUrl: './entry-list.component.html',
-  styleUrls: ['./entry-list.component.scss']
+  styleUrls: ['./entry-list.component.scss'],
 })
 export class EntryListComponent implements OnInit {
 
@@ -14,8 +14,7 @@ export class EntryListComponent implements OnInit {
   constructor(private storage: CostsStorageService) { }
   ngOnInit(): void {
   }
-  deleteEntry(id: number) {
+  deleteEntry(id: number): void {
     this.storage.deleteEntry(id);
-
   }
 }

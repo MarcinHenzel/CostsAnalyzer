@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Entry } from 'src/app/models/Entry';
 import { MatDialog } from '@angular/material/dialog';
 import { EntryFormComponent } from '../entry-form/entry-form.component';
+import { Entry } from 'src/app/shared/models/Entry';
 
 
 @Component({
@@ -16,10 +16,10 @@ export class EntryElComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  edit(){
-    this.dialog.open(EntryFormComponent, {data: this.entry,  width: '80vw'});
+  edit() {
+    this.dialog.open(EntryFormComponent, { data: this.entry, width: '80vw', panelClass: 'no-padding-dialog' });
   }
-  delete(){
+  delete() {
     this.deleteEl.emit(this.entry.id);
   }
 }

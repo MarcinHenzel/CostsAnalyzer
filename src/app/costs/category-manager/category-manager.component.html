@@ -1,18 +1,20 @@
 <h1 mat-dialog-title>Manage Your categories</h1>
 <mat-dialog-content>
   <h2>Add category</h2>
-  <form #addForm="ngForm" (ngSubmit)="addCategory()">
+  <form [formGroup]="addForm" #formDirective="ngForm" (ngSubmit)="addCategory(formDirective)">
     <mat-form-field>
-      <mat-label>Add</mat-label>
-      <input type="text" matInput [(ngModel)]="newCat" name="newCat" required>
+      <mat-label>Category</mat-label>
+      <input type="text" matInput formControlName="addCategoryControl">
+      <mat-error>Category must be unique</mat-error>
     </mat-form-field>
     <button mat-raised-button color="accent" type="submit" [disabled]="!addForm.valid">Add </button>
   </form>
+
   <h2>Delete category</h2>
   <form #deleteForm="ngForm" (ngSubmit)="deleteCategory()">
     <mat-form-field>
       <mat-label>Category</mat-label>
-      <mat-select [(ngModel)]="CatToDel" name="categories" matInput required>
+      <mat-select [(ngModel)]="catToDel" name="categories" matInput required>
         <mat-option *ngFor="let category of categories" [value]="category">
           {{category}}
         </mat-option>

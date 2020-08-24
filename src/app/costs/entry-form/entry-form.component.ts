@@ -2,8 +2,8 @@ import { Component, OnInit, Inject, Optional } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CategoryManagerComponent } from '../category-manager/category-manager.component';
-import { CostsStorageService } from '../costs-storage.service';
 import { LocalStorage } from 'ngx-webstorage';
+import { CostsStorageService } from 'src/app/shared/services/costs-storage.service';
 
 @Component({
   selector: 'app-entry-form',
@@ -25,26 +25,28 @@ export class EntryFormComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     this.entryForm = new FormGroup({
-      category: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
+      value: new FormControl('', [Validators.required, Validators.pattern('[0-9]*')]),
+      category: new FormControl('', Validators.required),
       description: new FormControl(''),
-      value: new FormControl('', Validators.required),
     });
-    if (this.isEditMode) this.fillForm();
+    if (this.isEditMode) {
+      this.fillForm();
+    }
   }
-  submitEntry() {
+  submitEntry(): void {
     this.isEditMode ? this.editEntry() : this.addEntry();
   }
-  editEntry() {
-     this.storage.editEntry({
-       id: this.dialogData.id,
-       category: this.category,
-       date: this.date,
-       description: this.description,
-       value: this.value
-     });
+  editEntry(): void {
+    this.storage.editEntry({
+      id: this.dialogData.id,
+      category: this.category,
+      date: this.date,
+      description: this.description,
+      value: this.value
+    });
   }
-  addEntry() {
+  addEntry(): void {
     this.storage.addEntry({
       id: this.storage.getUniqueEntryId(),
       category: this.category,
@@ -53,11 +55,11 @@ export class EntryFormComponent implements OnInit {
       value: this.value
     });
   }
-  openCategoryManager() {
+  openCategoryManager(): void {
     this.dialog.open(CategoryManagerComponent);
   }
 
-  fillForm() {
+  fillForm(): void {
     const { category, date, description, value } = this.dialogData;
     this.entryForm.setValue({
       category, date, description, value

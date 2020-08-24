@@ -8,8 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule, MatDialogClose } from '@angular/material/dialog';
 import { CategoryManagerComponent } from './category-manager/category-manager.component';
-import {MatSelectModule} from '@angular/material/select';
-import {MatButtonModule} from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [EntryFormComponent, EntryListComponent, EntryElComponent, CategoryManagerComponent],

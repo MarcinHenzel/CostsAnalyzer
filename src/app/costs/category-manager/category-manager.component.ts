@@ -1,28 +1,38 @@
-import { CostsStorageService } from './../costs-storage.service';
+import { CostsStorageService } from '../../shared/services/costs-storage.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { LocalStorage } from 'ngx-webstorage';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { CategoryValidator } from 'src/app/shared/validators/category.validator';
 
 @Component({
   selector: 'app-category-manager',
   templateUrl: './category-manager.component.html',
-  styleUrls: ['./category-manager.component.scss']
+  styleUrls: ['./category-manager.component.scss'],
+  providers: [CategoryValidator]
 })
 export class CategoryManagerComponent implements OnInit {
-  newCat: any;
-  CatToDel: any;
-  constructor(private storage: CostsStorageService, public dialogRef: MatDialogRef<CategoryManagerComponent>) { }
-
+  addForm: FormGroup;
+  catToDel: string;
   @LocalStorage() public categories;
-  ngOnInit(): void {
-  }
+  get newCat() { return this.addForm.get('addCategoryControl').value; }
 
-  addCategory(){
-    this.storage.addCategory(this.newCat);
-    this.newCat = '';
+  constructor(private categoryValidator: CategoryValidator,
+              private storage: CostsStorageService,
+              public dialogRef: MatDialogRef<CategoryManagerComponent>
+  ) { }
+  ngOnInit(): void {
+    this.addForm = new FormGroup({
+      addCategoryControl: new FormControl('',
+        [Validators.required, this.categoryValidator.checkCategory.bind(this.categoryValidator)])
+    });
   }
-  deleteCategory() {
-    this.storage.deleteCategory(this.CatToDel);
+  addCategory(formDirective): void {
+    this.storage.addCategory(this.newCat);
+    formDirective.resetForm();
+  }
+  deleteCategory(): void {
+    this.storage.deleteCategory(this.catToDel);
   }
   close(): void {
     this.dialogRef.close();
