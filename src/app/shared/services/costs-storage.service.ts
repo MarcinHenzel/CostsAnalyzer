@@ -21,7 +21,7 @@ export class CostsStorageService {
     this.webStorage.store('categories', this.categories);
   }
   addEntry(entry: Entry): void {
-    this.webStorage.store('entries', [...this.entries, entry]);
+    this.webStorage.store('entries', [entry, ...this.entries]);
   }
   deleteEntry(id: number): void {
     const filteredEntries = this.entries.filter(entry => {

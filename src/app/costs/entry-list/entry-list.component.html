@@ -1,1 +1,4 @@
-<app-entry-el *ngFor="let entry of entries" [entry]='entry' (deleteEl)="deleteEntry($event)"></app-entry-el>
+<div @staggerList>
+  <app-entry-el @entryAnim *ngFor="let entry of entries" [entry]='entry'
+    (deleteEl)="deleteEntry($event)"></app-entry-el>
+</div>
