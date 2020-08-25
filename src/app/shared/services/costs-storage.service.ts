@@ -13,7 +13,8 @@ export class CostsStorageService {
     this.initLocalStorage();
   }
   addCategory(category: string): void {
-    this.webStorage.store('categories', [...this.categories, category]);
+    const sortedCategories = [...this.categories, category].sort();
+    this.webStorage.store('categories', sortedCategories);
   }
   deleteCategory(toDelete: string): void {
     const index = this.categories.indexOf(toDelete);

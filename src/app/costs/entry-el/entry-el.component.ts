@@ -22,10 +22,9 @@ export class EntryElComponent implements OnInit {
     const dialogRef = this.dialog.open(EntryFormComponent, { data: this.entry, width: '80vw', panelClass: 'no-padding-dialog' });
     dialogRef.afterClosed().subscribe(() => {
       this.isAnimDisabled = false;
-    })
+    });
   }
-  delete() {
+  delete(): void {
     this.deleteEl.emit(this.entry.id);
   }
-
 }

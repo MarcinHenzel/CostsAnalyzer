@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LocalStorage } from 'ngx-webstorage';
 import { Entry } from 'src/app/shared/models/Entry';
 import { CostsStorageService } from 'src/app/shared/services/costs-storage.service';
-import { entryAnim, staggerList } from './entryAnim';
+import { entryAnim, staggerList } from './entryAnim.animation';
 @Component({
   selector: 'app-entry-list',
   templateUrl: './entry-list.component.html',
@@ -10,16 +10,11 @@ import { entryAnim, staggerList } from './entryAnim';
   animations: [entryAnim, staggerList]
 })
 export class EntryListComponent implements OnInit {
-  isEdited = false;
   @LocalStorage() public entries: Entry[];
   constructor(private storage: CostsStorageService) { }
   ngOnInit(): void {
   }
   deleteEntry(id: number): void {
     this.storage.deleteEntry(id);
-  }
-  toggleAnimation(toggle: boolean): void {
-    console.log({toggle});
-    this.isEdited = toggle;
   }
 }

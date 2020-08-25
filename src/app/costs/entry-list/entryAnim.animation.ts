@@ -34,6 +34,6 @@ export const staggerList = trigger('staggerList', [
       stagger(120, [
         animate('0.2s ease')
       ])
-    ])
+    ], {optional: true})
   ])
 ]);

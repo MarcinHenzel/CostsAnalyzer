@@ -20,8 +20,8 @@ export class EntryFormComponent implements OnInit {
   get value() { return this.entryForm.get('value').value; }
 
   constructor(private dialog: MatDialog,
-    @Optional() @Inject(MAT_DIALOG_DATA) private dialogData,
-    private storage: CostsStorageService
+              @Optional() @Inject(MAT_DIALOG_DATA) private dialogData,
+              private storage: CostsStorageService
   ) { }
   ngOnInit(): void {
     this.entryForm = new FormGroup({
